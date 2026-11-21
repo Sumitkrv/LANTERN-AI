@@ -13,7 +13,7 @@ RUN groupadd -g 10001 lantern \
     && mkdir /data
 WORKDIR /app
 COPY --from=build /opt/venv /opt/venv
-COPY app ./app
+COPY --chmod=0555 app ./app
 COPY --chmod=755 entrypoint.sh /usr/local/bin/lantern-entrypoint
 ENTRYPOINT ["lantern-entrypoint"]
 EXPOSE 8000

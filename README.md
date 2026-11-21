@@ -27,7 +27,7 @@ make up
 curl -fsS http://localhost:8000/health
 ```
 
-Open http://localhost:3000. The API listens on port 8000. Use `make logs` to follow startup and `make down` to stop the stack. The `lantern_data` volume keeps session history through container replacement and restarts.
+Open http://localhost:3000. The API listens on port 8000. Use `make logs` to follow startup and `make down` to stop the stack. The `lantern_data` volume keeps session history through container replacement and restarts. If port 8000 is taken, set `BACKEND_HOST_PORT` and point `VITE_API_BASE_URL` at the new host port before running `make up`.
 
 ### Without Docker
 
@@ -63,6 +63,7 @@ npm run dev
 | `ENABLE_FAILURE_SIMULATION` | Enables the `X-Simulate-Failure` hook when set to `true`. |
 | `VITE_API_BASE_URL` | Browser-facing backend base URL, embedded into the frontend at build time. |
 | `PORT` | Backend Docker port, normally 8000 locally or injected by the host. |
+| `BACKEND_HOST_PORT` | Compose host port for the backend. Defaults to 8000. |
 
 ### Public deployment
 

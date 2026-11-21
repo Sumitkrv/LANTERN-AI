@@ -2,7 +2,7 @@ services:
   backend:
     build: ./backend
     ports:
-      - "8000:8000"
+      - "${BACKEND_HOST_PORT:-8000}:8000"
     environment:
       LLM_API_KEYS: "${LLM_API_KEYS:-}"
       LLM_MODEL: "${LLM_MODEL:-gemini/gemini-3.5-flash-lite}"

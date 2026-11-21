@@ -13,7 +13,7 @@ def csv(value: str) -> tuple[str, ...]:
 @dataclass(frozen=True)
 class Settings:
     keys: tuple[str, ...] = field(repr=False)
-    model: str = "gemini/gemini-2.5-flash"
+    model: str = "gemini/gemini-3.5-flash-lite"
     database_url: str = "sqlite:///./data/app.db"
     allowed_origins: tuple[str, ...] = ("http://localhost:3000",)
     enable_failure_simulation: bool = False

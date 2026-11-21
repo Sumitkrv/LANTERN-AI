@@ -2,15 +2,15 @@ FROM python:3.12-slim-bookworm AS build
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /build
 COPY requirements.txt .
-RUN python -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
+RUN python -m venv --without-pip /opt/venv \
+    && python -m pip --python /opt/venv install --no-cache-dir --no-compile -r requirements.txt
 
 FROM python:3.12-slim-bookworm AS runtime
 ENV PATH="/opt/venv/bin:${PATH}" PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PORT=8000
+ENV DATABASE_URL=sqlite:////data/app.db
 RUN groupadd -g 10001 lantern \
     && useradd -M -u 10001 -g lantern lantern \
-    && install -d -o lantern -g lantern /app /data \
-    && touch /data/.lantern-volume \
-    && chown lantern:lantern /data/.lantern-volume
+    && mkdir /data
 WORKDIR /app
 COPY --from=build /opt/venv /opt/venv
 COPY app ./app

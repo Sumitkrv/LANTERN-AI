@@ -54,7 +54,7 @@ npm run dev
 | Variable | Purpose |
 | --- | --- |
 | `LLM_API_KEYS` | Comma-separated list of at least two distinct secrets that can call the configured model. |
-| `LLM_MODEL` | LiteLLM model identifier. The example uses `gemini/gemini-2.5-flash`. |
+| `LLM_MODEL` | LiteLLM model identifier. The example uses `gemini/gemini-3.5-flash-lite`. |
 | `LLM_API_BASE` | Optional provider API base, such as an OpenAI-compatible server's `/v1` base. Leave blank for Gemini or the provider's default. |
 | `LLM_TIMEOUT_SECONDS` | Per-key inference timeout. Defaults to 18 seconds. |
 | `LLM_CACHE_TTL_SECONDS` | Process-local cache lifetime. Defaults to 600 seconds. |

@@ -1,7 +1,7 @@
 .PHONY: up down logs test build
 
 up:
-	docker compose up --build -d
+	docker compose up -d
 
 down:
 	docker compose down

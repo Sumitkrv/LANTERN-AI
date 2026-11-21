@@ -10,8 +10,18 @@ function newId(): string {
 }
 
 export function useChat() {
-  const [sessionId, setSessionId] = useState(newId)
-  const [messages, setMessages] = useState<Message[]>([])
+  const [sessionId, setSessionId] = useState<string>(() => {
+  return localStorage.getItem('lantern-session-id') || newId()
+  })
+
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const saved = localStorage.getItem('lantern-messages')
+      return saved ? JSON.parse(saved) as Message[] : []
+    } catch {
+      return []
+    }
+  })
   const [pending, setPending] = useState<Message | null>(null)
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [draft, setDraft] = useState('')
@@ -20,6 +30,13 @@ export function useChat() {
   const activeRequest = useRef<AbortController | null>(null)
 
   useEffect(() => () => activeRequest.current?.abort(), [])
+  useEffect(() => {
+    localStorage.setItem('lantern-session-id', sessionId)
+  }, [sessionId])
+
+  useEffect(() => {
+    localStorage.setItem('lantern-messages', JSON.stringify(messages))
+  }, [messages])
 
   function newConversation() {
     activeRequest.current?.abort()

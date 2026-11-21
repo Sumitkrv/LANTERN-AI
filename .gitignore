@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+.pytest_cache/
+.venv/
+node_modules/
+dist/
+coverage/
+*.sqlite*
+*.db
+*.db-shm
+*.db-wal
+.DS_Store
+.vercel/
